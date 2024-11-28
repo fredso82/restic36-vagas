@@ -1,5 +1,6 @@
 const express = require('express');
 const { create, update, remove, findAll } = require('./repositories/vagasRepository');
+const usuarioRepository = require('./repositories/usuariosRepository');
 
 const app = express();
 const port = 3000;
@@ -28,6 +29,15 @@ app.delete('/vagas/:id', (req, res) => {
     const { id } = req.params;
     remove(id);
     res.status(204).send();
+});
+
+app.post('/login', (req, res) => {
+    const body = req.body;
+    const usuario = usuarioRepository.login(body);
+    if (!usuario) {
+        return res.status(401).send("Login ou senha inválidos");
+    }
+    return res.json(usuario);
 });
 
 app.listen(port, () => {
