@@ -7,6 +7,7 @@ import { colors } from "../../styles/colors";
 import Input from "../../componentes/Input";
 import api from '../../services/api';
 import { Usuario } from "../../models/usuario";
+import { useUser } from "../../context/UserContext";
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
@@ -14,6 +15,7 @@ export default function Login() {
     const navigation = useNavigation<Props['navigation']>();
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+    const { login } = useUser();
 
     const handleLogin = () => {
         try {
@@ -27,11 +29,12 @@ export default function Login() {
                 return;
             }
 
-            const login = { email: email, senha: senha }
+            const usuarioLogado = { email: email, senha: senha }
 
-            api.post<Usuario>('/login', login)
+            api.post<Usuario>('/login', usuarioLogado)
                 .then((response) => {
-                    navigation.navigate("Vagas");
+                    login(response.data);
+                    //navigation.navigate("Vagas");
                 })
                 .catch((error) => {
                     if (error.response.status === 401) {

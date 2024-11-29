@@ -11,9 +11,16 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './src/screens/Login';
 import Vagas from './src/screens/Vagas';
 import Registro from './src/screens/Registro';
+import { UserProvider } from './src/context/UserContext';
+import AppNavigator from './src/AppNavigator';
 
 export default function App() {
-    const Stack = createNativeStackNavigator();
+    return (
+        <UserProvider>
+            <AppNavigator />
+        </UserProvider>
+    );
+    //const Stack = createNativeStackNavigator();
     
     // const [vagas, setVagas] = useState<Vaga[]>([]);
 
@@ -48,15 +55,15 @@ export default function App() {
     //     </SafeAreaView>
     // );
 
-    return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName='Login'>
-                <Stack.Screen name='Login' component={Login} options={{title: "Login", headerTitleAlign: "center"}} />
-                <Stack.Screen name='Registro' component={Registro} options={{title: "Registrar", headerTitleAlign: "center"}} />
-                <Stack.Screen name='Vagas' component={Vagas} options={{title: "Vagas", headerTitleAlign: "center"}} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    )
+    // return (
+    //     <NavigationContainer>
+    //         <Stack.Navigator initialRouteName='Login'>
+    //             <Stack.Screen name='Login' component={Login} options={{title: "Login", headerTitleAlign: "center"}} />
+    //             <Stack.Screen name='Registro' component={Registro} options={{title: "Registrar", headerTitleAlign: "center"}} />
+    //             <Stack.Screen name='Vagas' component={Vagas} options={{title: "Vagas", headerTitleAlign: "center"}} />
+    //         </Stack.Navigator>
+    //     </NavigationContainer>
+    // )
 }
 
 // const styles = StyleSheet.create({
