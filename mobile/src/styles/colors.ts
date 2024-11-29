@@ -10,5 +10,6 @@ export const colors = {
         100: "#E1E1E1"
     },
     red: "#CD5E55",
-    blue: "##2dabe1"    
+    blue: "##2dabe1",
+    orange: "#FB621E"    
 }
