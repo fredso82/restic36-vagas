@@ -7,11 +7,13 @@ import { colors } from "../../styles/colors";
 import Input from "../../componentes/Input";
 import api from '../../services/api';
 import { Usuario } from "../../models/usuario";
+import { useUser } from "../../context/UserContext";
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
 export default function Registro() {
-    const navigation = useNavigation<Props['navigation']>();
+    const { login } = useUser();
+    //const navigation = useNavigation<Props['navigation']>();
     const [nome, setNome] = useState('');
     const [vldNome, setVldNome] = useState('');
     const [email, setEmail] = useState('');
@@ -60,8 +62,8 @@ export default function Registro() {
             const registro = {nome: nome, email: email, senha: senha};
             api.post<Usuario>('/registro', registro)
                 .then(response => {
-                    const usuario = response.data;
-                    navigation.navigate("Vagas");    
+                    login(response.data);
+                    //navigation.navigate("Vagas");    
                 })
                 .catch((error) => {
                     alert(error.response.data);

@@ -1,5 +1,6 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { Usuario } from "../models/usuario";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface UserContextProps {
     children: ReactNode;
@@ -20,12 +21,24 @@ const UserContext = createContext<UserContextType>({
 export const UserProvider = ({children}: UserContextProps) => {
     const [user, setUser] = useState<Usuario>({} as Usuario);
 
-    function login(userData: Usuario){
+    useEffect(() => {
+        const loadUser = async () => {
+            const usuarioLogado = await AsyncStorage.getItem("@user");
+            if (usuarioLogado) {
+                setUser(JSON.parse(usuarioLogado));
+            }
+        }
+        loadUser();
+    }, []);
+
+    const login = async (userData: Usuario) => {
         setUser(userData);
+        await AsyncStorage.setItem("@user", JSON.stringify(userData));
     };
 
-    function logout(){
+    const logout = async () => {
         setUser({} as Usuario);
+        await AsyncStorage.removeItem("@user");
     };
 
     return (
