@@ -7,7 +7,7 @@ let usuarios = [{
     senha: "admin"
 }];
 
-function create({ nome, email, senha }) {
+function create({ nome, email, senha }) {    
     const usuario = {
         id: uuidv4(),
         nome,
@@ -19,7 +19,6 @@ function create({ nome, email, senha }) {
 }
 
 function login({email, senha}) {
-    console.log(email);
     const index = usuarios.findIndex(u => u.email === email && u.senha === senha);
     if (index === -1) {
         return null;
@@ -30,7 +29,22 @@ function login({email, senha}) {
     return {id: usuario.id, nome: usuario.nome, email: usuario.email};
 }
 
+function findAll() {
+    return usuarios;
+}
+
+function findByEmail(email){
+    const index = usuarios.findIndex(u => u.email.trimEnd() === email.trimEnd());
+    if (index === -1) {
+        return null;
+    }
+
+    return usuarios[index];
+}
+
 module.exports = {
     create,
-    login
+    login,
+    findAll,
+    findByEmail
 }

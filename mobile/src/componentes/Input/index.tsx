@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     container: {
         alignItems: "flex-start",
         width: "100%",
-        gap: 4
+        gap: 4        
     },
     label: {
         fontSize: 14,

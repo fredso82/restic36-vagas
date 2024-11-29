@@ -43,7 +43,6 @@ function remove(id) {
 function findAll() {
     return vagas;
 }
-
 module.exports = {
     create,
     update,

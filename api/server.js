@@ -31,6 +31,22 @@ app.delete('/vagas/:id', (req, res) => {
     res.status(204).send();
 });
 
+app.get('/usuarios', (req, res) => {
+    const usuario = usuarioRepository.findAll();
+    res.json(usuario);
+});
+
+app.post('/registro', (req, res) => {
+    const body = req.body;
+    const usuarioExistente = usuarioRepository.findByEmail(body.email);
+    if (usuarioExistente) {
+        return res.status(400).send("Já existe um usuário com este e-mail");
+    }
+    const usuarios = usuarioRepository.findAll
+    const usuario = usuarioRepository.create(body);
+    res.status(201).json(usuario);
+});
+
 app.post('/login', (req, res) => {
     const body = req.body;
     const usuario = usuarioRepository.login(body);
@@ -39,6 +55,7 @@ app.post('/login', (req, res) => {
     }
     return res.json(usuario);
 });
+
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
