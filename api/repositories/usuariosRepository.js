@@ -5,18 +5,17 @@ async function findAll() {
 }
 
 async function findByEmail(email) {
-    const usuarios = await Usuario.findAll();
-    const index = usuarios.find(u => u.email === email);
-    if (index === -1) {
-        return null;
-    }
+    return await Usuario.findAll({ where: { email: email } });
+}
 
-    return usuarios[index];
+async function login(email, senha) {
+    return await Usuario.findAll({ where: { email: email, senha: senha } });
 }
 
 async function findById(id) {
     return await Usuario.findByPk(id);
 }
+
 async function create({ nome, email, senha }) {
     return await Usuario.create({ nome, email, senha });
 }
@@ -46,6 +45,7 @@ module.exports = {
     findAll,
     findByEmail,
     findById,
+    login,
     create,
     update,
     remove,

@@ -42,18 +42,18 @@ export default function Vagas() {
 }
 
 const styles = StyleSheet.create({
-    titulo: {
-        fontSize: 20,
-        fontWeight: "bold"
-    },
     container: {
         flex: 1,
         flexDirection: "column",
         backgroundColor: "#FAFAFA",
         alignItems: "center",
         justifyContent: "flex-start",
-        paddingTop: 60,
+        paddingTop: 10,
         paddingHorizontal: 5,
+    },
+    titulo: {
+        fontSize: 20,
+        fontWeight: "bold"
     },
     containerTasks: {
         flex: 1,

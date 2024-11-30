@@ -13,7 +13,6 @@ type Props = NativeStackScreenProps<RootStackParamList>;
 
 export default function Registro() {
     const { login } = useUser();
-    //const navigation = useNavigation<Props['navigation']>();
     const [nome, setNome] = useState('');
     const [vldNome, setVldNome] = useState('');
     const [email, setEmail] = useState('');
@@ -63,7 +62,6 @@ export default function Registro() {
             api.post<Usuario>('/registro', registro)
                 .then(response => {
                     login(response.data);
-                    //navigation.navigate("Vagas");    
                 })
                 .catch((error) => {
                     alert(error.response.data);

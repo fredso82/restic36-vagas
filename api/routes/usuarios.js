@@ -2,14 +2,13 @@ const express = require('express');
 const router = express.Router();
 const usuarioRepository = require('../repositories/usuariosRepository.js');
 
-// Get all users
-router.get('/', (req, res) => {
-    res.json({ usuarios: usuarioRepository.findAll() });
+router.get('/', async (req, res) => {
+    const usuarios = await usuarioRepository.findAll();
+    res.json({ usuarios });
 });
 
-// Get user by id
-router.get('/:id', (req, res) => {
-    const user = usuarioRepository.findById(req.params.id);
+router.get('/:id', async (req, res) => {
+    const user = await usuarioRepository.findById(req.params.id);
     if (user) {
         res.json({ user });
     } else {
@@ -17,15 +16,13 @@ router.get('/:id', (req, res) => {
     }
 });
 
-// Create a new user
-router.post('/', (req, res) => {
-    const user = usuarioRepository.create(req.body);
+router.post('/', async (req, res) => {
+    const user = await usuarioRepository.create(req.body);
     res.json({ user });
 });
 
-// Update a user
-router.put('/:id', (req, res) => {
-    const user = usuarioRepository.update(req.params.id, req.body);
+router.put('/:id', async (req, res) => {
+    const user = await usuarioRepository.update(req.params.id, req.body);
     if (user) {
         res.json({ user });
     } else {
@@ -33,9 +30,8 @@ router.put('/:id', (req, res) => {
     }
 });
 
-// Delete a user
-router.delete('/:id', (req, res) => {
-    const user = usuarioRepository.remove(req.params.id);
+router.delete('/:id', async (req, res) => {
+    const user = await  usuarioRepository.remove(req.params.id);
     if (user) {
         res.json({ user });
     } else {

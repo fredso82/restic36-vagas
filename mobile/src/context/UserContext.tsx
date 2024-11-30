@@ -37,6 +37,7 @@ export const UserProvider = ({children}: UserContextProps) => {
     };
 
     const logout = async () => {
+        console.log("aaa")
         setUser({} as Usuario);
         await AsyncStorage.removeItem("@user");
     };
