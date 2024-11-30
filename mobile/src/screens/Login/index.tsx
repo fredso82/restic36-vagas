@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Keyboard, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { RootStackParamList } from "../../routes/routes";
 import { useState } from "react";
 import { colors } from "../../styles/colors";
@@ -48,7 +48,7 @@ export default function Login() {
     };
 
     return (
-        <View style={styles.container}>
+        <Pressable style={styles.container} onPress={Keyboard.dismiss}>
             <View style={styles.form}>
                 <Input label="E-mail" placeholder="digite seu e-mail" senha={false} value={email} onChangeText={setEmail} />
                 <Input label="Senha" placeholder="digite sua senha" senha={true} value={senha} onChangeText={setSenha} />
@@ -61,7 +61,7 @@ export default function Login() {
                     </TouchableOpacity>
                 </View>
             </View>
-        </View>
+        </Pressable>
     )
 }
 
@@ -70,9 +70,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         alignItems: "center",
-        //width: "100%",
         padding: 16,
-        //gap: 16,
         backgroundColor: colors.white
     },
     form: {

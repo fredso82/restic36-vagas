@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Keyboard, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useState } from "react";
 import { colors } from "../../styles/colors";
 import Input from "../../componentes/Input";
@@ -69,7 +69,7 @@ export default function Registro() {
     };
 
     return (
-        <View style={styles.container}>
+        <Pressable style={styles.container} onPress={Keyboard.dismiss}>
             <View style={styles.form}>
                 <Input label="Nome" placeholder="digite seu nome" senha={false} value={nome} onChangeText={setNome} />
                 {vldNome && (<Text style={styles.labelValidacao}>{vldNome}</Text>)}
@@ -83,7 +83,7 @@ export default function Registro() {
                     <Text style={{ color: colors.white }}>Cadastrar</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </Pressable>
     )
 }
 

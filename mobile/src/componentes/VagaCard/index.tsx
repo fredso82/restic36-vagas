@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Linking, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Vaga } from '../../models/vaga';
 import { colors } from '../../styles/colors';
@@ -17,6 +17,34 @@ export function VagaCard({ vaga }: VagaProps) {
     const { setVaga } = useAppContext();
     const navigation = useNavigation<Props['navigation']>();
 
+    function handleContato() {
+        const mensagem = `Olá, gostaria de entrar em contato para falar a respeito da vaga ${vaga.titulo}.`;
+        const url = `whatsapp://send?phone=${vaga.telefone}&text=${encodeURIComponent(mensagem)}`;
+
+        // Linking.canOpenURL(url)
+        //     .then((supported) => {
+        //         if (!supported) {
+        //             alert("WhatsApp não está instalado no dispositivo.");
+        //         } else {
+        //             return Linking.openURL(url);
+        //         }
+        //     })
+        //     .catch((err) => alert("Ocorreu um erro ao tentar abrir o WhatsApp."));
+
+        // Linking.canOpenURL(`whatsapp://send?text=${mensagem}`).then(supported => {
+        //     if (supported) {
+        //       return Linking.openURL(
+        //         `whatsapp://send?phone=${vaga.telefone}&text=${mensagem}`
+        //       );
+        //     } else {
+        //       return Linking.openURL(
+        //         `https://api.whatsapp.com/send?phone=${vaga.telefone}&text=${mensagem}`
+        //       );
+        //     }
+        //   })
+
+        Linking.openURL(`whatsapp://send?text=${mensagem}&phone=${vaga.telefone}`);
+    }
     return (
         <TouchableOpacity onPress={() => {
             setVaga(vaga);
@@ -28,7 +56,7 @@ export function VagaCard({ vaga }: VagaProps) {
             <Text style={styles.data}>{new Date(vaga.dataCadastro).toLocaleDateString()}</Text>
             <Text style={{ color: vaga.status == "Disponível" ? colors.blue : colors.red }}>{vaga.status}</Text>
             {vaga.status == "Disponível" && (
-                <TouchableOpacity onPress={() => alert("contato")} style={styles.containerContato}>
+                <TouchableOpacity onPress={handleContato} style={styles.containerContato}>
                     <Feather name='message-circle' size={25} color='white' style={styles.iconContato}></Feather>
                     <Text style={styles.textContato}>Entrar em contato</Text>
                 </TouchableOpacity>

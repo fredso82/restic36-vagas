@@ -1,13 +1,14 @@
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { RootStackParamList } from "../../routes/routes";
-import { useContext, useEffect, useState } from "react";
-import { colors } from "../../styles/colors";
-import Input from "../../componentes/Input";
+import { Picker } from '@react-native-picker/picker';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useState } from 'react';
+import { Keyboard, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import Input from '../../componentes/Input';
+import { useAppContext } from '../../context/AppContext';
+import { RootStackParamList } from '../../routes/routes';
 import api from '../../services/api';
-import { useAppContext } from "../../context/AppContext";
-import { Picker } from "@react-native-picker/picker";
+import { colors } from '../../styles/colors';
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
@@ -20,10 +21,6 @@ export default function VagaDetails() {
     const [empresa, setEmpresa] = useState(vaga.empresa);
     const [status, setStatus] = useState(vaga.status);
 
-    useEffect(() => {
-        //setStatus(vaga.status);
-        console.log(status);
-    }, []);
     const handleCadastrar = () => {
         try {
 
@@ -48,7 +45,7 @@ export default function VagaDetails() {
     };
 
     return (
-        <View style={styles.container}>
+        <Pressable style={styles.container} onPress={Keyboard.dismiss}>
             <View style={styles.form}>
                 <Input label="Título" placeholder="informe o título" senha={false} value={titulo} onChangeText={setTitulo} />
                 <Input label="Descrição" placeholder="informe a descrição" senha={false} value={descricao} onChangeText={setDescricao} />
@@ -69,7 +66,7 @@ export default function VagaDetails() {
                     <Text style={{ color: colors.white }}>Gravar</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </Pressable>
     )
 }
 

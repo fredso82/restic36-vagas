@@ -1,6 +1,6 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Keyboard, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { RootStackParamList } from "../../routes/routes";
 import { useState } from "react";
 import { colors } from "../../styles/colors";
@@ -34,7 +34,7 @@ export default function VagaAdd() {
     };
 
     return (
-        <View style={styles.container}>
+        <Pressable style={styles.container} onPress={Keyboard.dismiss}>
             <View style={styles.form}>
                 <Input label="Título" placeholder="informe o título" senha={false} value={titulo} onChangeText={setTitulo} />
                 <Input label="Descrição" placeholder="informe a descrição" senha={false} value={descricao} onChangeText={setDescricao} />
@@ -44,7 +44,7 @@ export default function VagaAdd() {
                     <Text style={{ color: colors.white }}>Cadastrar</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </Pressable>
     )
 }
 

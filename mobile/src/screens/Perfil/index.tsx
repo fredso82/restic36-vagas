@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Keyboard, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import Input from '../../componentes/Input';
 import { useAppContext } from '../../context/AppContext';
@@ -60,7 +60,7 @@ export default function Perfil() {
     };
 
     return (
-        <View style={styles.container}>
+        <Pressable style={styles.container} onPress={Keyboard.dismiss}>
             <View style={styles.form}>
                 <Input label="Nome" placeholder="digite seu nome" senha={false} value={nome} onChangeText={setNome} />
                 {vldNome && (<Text style={styles.labelValidacao}>{vldNome}</Text>)}
@@ -77,7 +77,7 @@ export default function Perfil() {
                     <Text style={{ color: colors.white }}>Sair</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </Pressable>
     )
 }
 
