@@ -1,5 +1,5 @@
-import { Button, StyleSheet, Text, TouchableOpacity } from 'react-native';
-
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 import { Vaga } from '../../models/vaga';
 import { colors } from '../../styles/colors';
 import { useAppContext } from '../../context/AppContext';
@@ -15,8 +15,8 @@ export interface VagaProps {
 
 export function VagaCard({ vaga }: VagaProps) {
     const { setVaga } = useAppContext();
-    const navigation = useNavigation<Props['navigation']>(); 
-    
+    const navigation = useNavigation<Props['navigation']>();
+
     return (
         <TouchableOpacity onPress={() => {
             setVaga(vaga);
@@ -27,6 +27,12 @@ export function VagaCard({ vaga }: VagaProps) {
             <Text style={styles.descricao}>{vaga.descricao}</Text>
             <Text style={styles.data}>{new Date(vaga.dataCadastro).toLocaleDateString()}</Text>
             <Text style={{ color: vaga.status == "Disponível" ? colors.blue : colors.red }}>{vaga.status}</Text>
+            {vaga.status == "Disponível" && (
+                <TouchableOpacity onPress={() => alert("contato")} style={styles.containerContato}>
+                    <Feather name='message-circle' size={25} color='white' style={styles.iconContato}></Feather>
+                    <Text style={styles.textContato}>Entrar em contato</Text>
+                </TouchableOpacity>
+            )}
         </TouchableOpacity>
     )
 }
@@ -57,5 +63,26 @@ const styles = StyleSheet.create({
         lineHeight: 16,
         textAlign: "left",
         color: colors.gray[800]
+    },
+    containerContato: {
+        backgroundColor: colors.gray[300],
+        padding: 5,
+        //height: 40,
+        //width: 30,
+        borderRadius: 13,
+        display: "flex",
+        flexDirection: "row",
+        //alignItems: "center",
+        justifyContent: "center",
+    },
+    iconContato: {
+        width: 40
+    },
+    textContato: {
+        width: 150,
+        padding: 0,
+        margin: 0,
+        alignSelf: "center",
+        color: colors.white
     }
 });
