@@ -7,7 +7,7 @@ import { colors } from "../../styles/colors";
 import Input from "../../componentes/Input";
 import api from '../../services/api';
 import { Usuario } from "../../models/usuario";
-import { useUser } from "../../context/UserContext";
+import { useUser } from "../../context/AppContext";
 
 
 export default function Perfil() {

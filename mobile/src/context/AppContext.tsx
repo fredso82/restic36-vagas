@@ -1,25 +1,31 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { Usuario } from "../models/usuario";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Vaga } from "../models/vaga";
 
-interface UserContextProps {
+interface AppContextProps {
     children: ReactNode;
 }
 
-type UserContextType = {
+type AppContextType = {
     user: Usuario;
+    vaga: Vaga;
+    setVaga: (vaga: Vaga) => void;
     login: (userData: Usuario) => void;
     logout: () => void;
 }
 
-const UserContext = createContext<UserContextType>({
+const AppContext = createContext<AppContextType>({
     user: {} as Usuario,
+    vaga: {} as Vaga,
+    setVaga: () => {},
     login: () => {},
     logout: () => {}
 });
 
-export const UserProvider = ({children}: UserContextProps) => {
+export const AppProvider = ({children}: AppContextProps) => {
     const [user, setUser] = useState<Usuario>({} as Usuario);
+    const [vaga, setVaga] = useState<Vaga>({} as Vaga);
 
     useEffect(() => {
         const loadUser = async () => {
@@ -42,10 +48,10 @@ export const UserProvider = ({children}: UserContextProps) => {
     };
 
     return (
-        <UserContext.Provider value={{user, login, logout}}>
+        <AppContext.Provider value={{user, vaga, setVaga, login, logout}}>
             {children}
-        </UserContext.Provider>
+        </AppContext.Provider>
     );
 };
 
-export const useUser = () => useContext(UserContext);
+export const useAppContext = () => useContext(AppContext);

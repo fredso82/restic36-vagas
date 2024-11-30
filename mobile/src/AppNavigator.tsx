@@ -2,20 +2,21 @@ import { Feather } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator, TransitionPresets } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useUser } from "./context/UserContext";
+import { useAppContext } from "./context/AppContext";
 import Login from './screens/Login';
 import Registro from './screens/Registro';
 import Vagas from './screens/Vagas';
 import { TouchableOpacity } from 'react-native';
 import React from 'react';
 import Perfil from './screens/Perfil';
-import VagasAdd from './screens/VagasAdd';
+import VagaAdd from './screens/VagaAdd';
+import VagaDetails from './screens/VagaDetails';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function AppNavigator() {
-    const { user, logout } = useUser();
+    const { user, logout } = useAppContext();
 
     const AuthStack = () => (
         <Stack.Navigator>
@@ -33,26 +34,19 @@ export default function AppNavigator() {
                 tabBarIcon: ({ color, size }) => <Feather name="user" color={color} size={size} />
             }} />
         </Tab.Navigator>
-        // <Stack.Navigator>
-        //     <Stack.Screen name='Vagas' component={Vagas} options={
-        //         {
-        //             title: "Vagas",
-        //             headerTitleAlign: "center",
-        //             headerRight: () => (
-        //                 <TouchableOpacity onPress={ logout }>
-        //                     <Feather name='log-out' size={25}></Feather>
-        //                 </TouchableOpacity>
-        //             )
-        //         }} />
-        // </Stack.Navigator>
     );
 
     const AppStack = () => (
         <Stack.Navigator>
             <Stack.Screen name="Tabs" component={TabNavigator} options={{ headerShown: false }} />
-            <Stack.Screen name="VagasAdd" component={VagasAdd} options={{ title: "Cadastro de Vaga", 
-            presentation: "modal",
-                ...TransitionPresets.FadeTransition }} />
+            <Stack.Screen name="VagaAdd" component={VagaAdd} options={{
+                title: "Cadastro de Vaga",
+                presentation: "modal", ...TransitionPresets.FadeTransition
+            }} />
+            <Stack.Screen name="VagaDetails" component={VagaDetails} options={{
+                title: "Detalhes de Vaga",
+                presentation: "modal", ...TransitionPresets.FadeTransition
+            }} />
         </Stack.Navigator>
     )
 

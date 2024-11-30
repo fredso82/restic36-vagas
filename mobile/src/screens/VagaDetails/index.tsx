@@ -6,17 +6,17 @@ import { useState } from "react";
 import { colors } from "../../styles/colors";
 import Input from "../../componentes/Input";
 import api from '../../services/api';
+import { useAppContext } from "../../context/AppContext";
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
-export default function VagasAdd() {
-    const navigation = useNavigation<Props['navigation']>();
-    const route = useRoute();
-    
-    const [titulo, setTitulo] = useState('');
-    const [descricao, setDescricao] = useState('');
-    const [telefone, setTelefone] = useState('');
-    const [empresa, setEmpresa] = useState('');
+export default function VagaDetails() {
+    const { vaga } = useAppContext();
+    const navigation = useNavigation<Props['navigation']>();    
+    const [titulo, setTitulo] = useState(vaga.titulo);
+    const [descricao, setDescricao] = useState(vaga.descricao);
+    const [telefone, setTelefone] = useState(vaga.telefone);
+    const [empresa, setEmpresa] = useState(vaga.empresa);
 
     const handleCadastrar = () => {
         try {
@@ -43,7 +43,7 @@ export default function VagasAdd() {
                 <Input label="Telefone" placeholder="informe o telefone" senha={false} value={telefone} onChangeText={setTelefone} />
                 <Input label="Empresa" placeholder="informe a empresa" senha={false} value={empresa} onChangeText={setEmpresa} />
                 <TouchableOpacity style={styles.botao} onPress={handleCadastrar}>
-                    <Text style={{ color: colors.white }}>Cadastrar</Text>
+                    <Text style={{ color: colors.white }}>Gravar</Text>
                 </TouchableOpacity>
             </View>
         </View>

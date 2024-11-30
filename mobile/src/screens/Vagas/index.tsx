@@ -44,7 +44,7 @@ export default function Vagas() {
                     }
                 />
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate("VagasAdd") } style={styles.addVaga}>
+            <TouchableOpacity onPress={() => navigation.navigate("VagaAdd") } style={styles.addVaga}>
                 <Feather name='plus' size={40} color='white'></Feather>
             </TouchableOpacity>
         </SafeAreaView>
@@ -68,8 +68,7 @@ const styles = StyleSheet.create({
     containerTasks: {
         flex: 1,
         marginTop: 15,
-        width: "100%",
-        maxHeight: "50%",
+        width: "100%"
     },
     addVaga: {
         backgroundColor: colors.orange,
