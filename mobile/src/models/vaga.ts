@@ -3,6 +3,7 @@ export type Vaga = {
     titulo: string;
     descricao: string;
     telefone: string;
-    empersa: string;
+    empresa: string;
     dataCadastro: string;
+    status: string;
 }

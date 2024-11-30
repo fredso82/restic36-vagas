@@ -7,15 +7,15 @@ import { colors } from "../../styles/colors";
 import Input from "../../componentes/Input";
 import api from '../../services/api';
 import { Usuario } from "../../models/usuario";
-import { useUser } from "../../context/UserContext";
+import { useAppContext } from "../../context/AppContext";
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
 export default function Login() {
+    const { login } = useAppContext();
     const navigation = useNavigation<Props['navigation']>();
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-    const { login } = useUser();
 
     const handleLogin = () => {
         try {
@@ -34,7 +34,6 @@ export default function Login() {
             api.post<Usuario>('/login', usuarioLogado)
                 .then((response) => {
                     login(response.data);
-                    //navigation.navigate("Vagas");
                 })
                 .catch((error) => {
                     if (error.response.status === 401) {
@@ -46,7 +45,6 @@ export default function Login() {
         } catch (error) {
             console.log(error);
         }
-
     };
 
     return (

@@ -24,13 +24,12 @@ async function create({ titulo, descricao, dataCadastro, telefone, status, empre
     }
 }
 
-async function update(id, { titulo, descricao, dataCadastro, telefone, status, empresa }) {
+async function update(id, { titulo, descricao, telefone, status, empresa }) {
     try {
-        const vaga = await vaga.findByPk(id);
+        const vaga = await Vaga.findByPk(id);
         if (vaga) {
             vaga.titulo = titulo;
             vaga.descricao = descricao;
-            vaga.dataCadastro = dataCadastro;
             vaga.telefone = telefone;
             vaga.status = status;
             vaga.empresa = empresa;

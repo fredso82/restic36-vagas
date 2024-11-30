@@ -6,10 +6,10 @@ import { colors } from "../../styles/colors";
 import Input from "../../componentes/Input";
 import api from '../../services/api';
 import { Usuario } from "../../models/usuario";
-import { useUser } from "../../context/UserContext";
+import { useAppContext } from "../../context/AppContext";
 
 export default function Registro() {
-    const { login } = useUser();
+    const { login } = useAppContext();
     const [nome, setNome] = useState('');
     const [vldNome, setVldNome] = useState('');
     const [email, setEmail] = useState('');
