@@ -5,11 +5,11 @@ async function findAll() {
 }
 
 async function findByEmail(email) {
-    return await Usuario.findAll({ where: { email: email } });
+    return await Usuario.findOne({ where: { email: email } });
 }
 
 async function login(email, senha) {
-    return await Usuario.findAll({ where: { email: email, senha: senha } });
+    return await Usuario.findOne({ where: { email: email, senha: senha } });
 }
 
 async function findById(id) {
@@ -34,7 +34,11 @@ async function update(id, { nome, email, senha }) {
     if (usuario) {
         usuario.nome = nome;
         usuario.email = email;
-        usuario.senha = senha;
+        
+        if (senha) {
+            usuario.senha = senha;
+        }
+        
         await usuario.save();
         return usuario;
     }

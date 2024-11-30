@@ -22,16 +22,16 @@ app.use('/vagas', vagasRoutes);
 app.post('/login', async (req, res) => {
     const body = req.body;
     const usuario = await usuarioRepository.login(body.email, body.senha);
-    if (usuario.length === 0) {
+    if (!usuario) {
         return res.status(401).send("Login ou senha inválidos");
     }
-    return res.json(usuario[0]);
+    return res.json(usuario);
 });
 
 app.post('/registro', async (req, res) => {
     const body = req.body;
     const usuarioExistente = await usuarioRepository.findByEmail(body.email);
-    if (usuarioExistente.length > 0) {
+    if (usuarioExistente) {
         return res.status(400).send("Já existe um usuário com este e-mail");
     }
     const usuario = await usuarioRepository.create(body);

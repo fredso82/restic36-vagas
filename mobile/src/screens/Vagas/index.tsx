@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#FAFAFA",
         alignItems: "center",
         justifyContent: "flex-start",
-        paddingTop: 10,
+        paddingTop: 60,
         paddingHorizontal: 5,
     },
     titulo: {

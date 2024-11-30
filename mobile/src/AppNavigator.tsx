@@ -8,6 +8,7 @@ import Registro from './screens/Registro';
 import Vagas from './screens/Vagas';
 import { TouchableOpacity } from 'react-native';
 import React from 'react';
+import Perfil from './screens/Perfil';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,18 +24,26 @@ export default function AppNavigator() {
     );
 
     const AppStack = () => (
-        <Stack.Navigator>
-            <Stack.Screen name='Vagas' component={Vagas} options={
-                {
-                    title: "Vagas",
-                    headerTitleAlign: "center",
-                    headerRight: () => (
-                        <TouchableOpacity onPress={ logout }>
-                            <Feather name='log-out' size={25}></Feather>
-                        </TouchableOpacity>
-                    )
-                }} />
-        </Stack.Navigator>
+        <Tab.Navigator screenOptions={{headerShown: false}}>
+            <Tab.Screen name='Vagas' component={Vagas} options={{
+                tabBarIcon: ({color, size}) => <Feather name="home" color={color} size={size} />
+            }} />
+            <Tab.Screen name='Perfil' component={Perfil} options={{
+                tabBarIcon: ({color, size}) => <Feather name="user" color={color} size={size} />
+            }} />
+        </Tab.Navigator>
+        // <Stack.Navigator>
+        //     <Stack.Screen name='Vagas' component={Vagas} options={
+        //         {
+        //             title: "Vagas",
+        //             headerTitleAlign: "center",
+        //             headerRight: () => (
+        //                 <TouchableOpacity onPress={ logout }>
+        //                     <Feather name='log-out' size={25}></Feather>
+        //                 </TouchableOpacity>
+        //             )
+        //         }} />
+        // </Stack.Navigator>
     );
 
     return (

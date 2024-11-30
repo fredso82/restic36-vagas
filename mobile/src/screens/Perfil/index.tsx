@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { RootStackParamList } from "../../routes/routes";
 import { useState } from "react";
 import { colors } from "../../styles/colors";
 import Input from "../../componentes/Input";
@@ -8,12 +9,13 @@ import api from '../../services/api';
 import { Usuario } from "../../models/usuario";
 import { useUser } from "../../context/UserContext";
 
-export default function Registro() {
-    const { login } = useUser();
-    const [nome, setNome] = useState('');
+
+export default function Perfil() {
+    const { user, logout } = useUser();
+    const [nome, setNome] = useState(user.nome);
     const [vldNome, setVldNome] = useState('');
-    const [email, setEmail] = useState('');
-    const [vldEmail, setVldEmail] = useState('');
+    const [email, setEmail] = useState(user.email);
+    const [vldEmail, setVldEmail] = useState('');    
     const [senha, setSenha] = useState('');
     const [vldSenha, setVldSenha] = useState('');
     const [confirmacaoSenha, setConfirmacaoSenha] = useState('');
@@ -26,7 +28,7 @@ export default function Registro() {
             setVldEmail("");
             setVldSenha("");
             setConfirmacao("");
-            
+
             if (!nome) {
                 setVldNome("Informe o nome");
                 valido = false;
@@ -35,17 +37,7 @@ export default function Registro() {
             if (!email) {
                 setVldEmail("Informe o email");
                 valido = false;
-            }
-            
-            if (!senha) {
-                setVldSenha("Informe a senha");
-                valido = false;
-            }
-
-            if (!confirmacaoSenha) {
-                setConfirmacao("Informe a confirmação");
-                valido = false;
-            }
+            }                        
 
             if (!valido) {
                 return;
@@ -55,10 +47,11 @@ export default function Registro() {
                 setConfirmacao("As senhas não conferem");
                 return;
             }
-            const registro = {nome: nome, email: email, senha: senha};
-            api.post<Usuario>('/registro', registro)
+
+            const alterar = {nome: nome, email: email, senha: senha};
+            api.put<Usuario>(`/usuarios/${user.id}`, alterar)
                 .then(response => {
-                    login(response.data);
+                    alert("Dados alterados com sucesso!");
                 })
                 .catch((error) => {
                     alert(error.response.data);
@@ -80,7 +73,10 @@ export default function Registro() {
                 <Input label="Confirmação" placeholder="repita sua senha" senha={true} value={confirmacaoSenha} onChangeText={setConfirmacaoSenha} />
                 {vldConfirmacao && (<Text style={styles.labelValidacao}>{vldConfirmacao}</Text>)}
                 <TouchableOpacity style={styles.botao} onPress={handleRegistrar}>
-                    <Text style={{ color: colors.white }}>Cadastrar</Text>
+                    <Text style={{ color: colors.white }}>Alterar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.botaoSair} onPress={logout}>
+                    <Text style={{ color: colors.white }}>Sair</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -90,8 +86,8 @@ export default function Registro() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: "row",
-        alignItems: "center",
+        flexDirection: "row",        
+        paddingTop: 60,
         padding: 16,
         backgroundColor: colors.white
     },
@@ -103,6 +99,16 @@ const styles = StyleSheet.create({
     },
     botao: {
         backgroundColor: colors.orange,
+        paddingVertical: 13,
+        flexDirection: "row",
+        justifyContent: "center",
+        width: "100%",
+        textAlign: "center",
+        alignContent: "center",
+        borderRadius: 20
+    },
+    botaoSair: {
+        backgroundColor: colors.red,
         paddingVertical: 13,
         flexDirection: "row",
         justifyContent: "center",
