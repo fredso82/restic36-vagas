@@ -19,32 +19,9 @@ export function VagaCard({ vaga }: VagaProps) {
 
     function handleContato() {
         const mensagem = `Olá, gostaria de entrar em contato para falar a respeito da vaga ${vaga.titulo}.`;
-        const url = `whatsapp://send?phone=${vaga.telefone}&text=${encodeURIComponent(mensagem)}`;
-
-        // Linking.canOpenURL(url)
-        //     .then((supported) => {
-        //         if (!supported) {
-        //             alert("WhatsApp não está instalado no dispositivo.");
-        //         } else {
-        //             return Linking.openURL(url);
-        //         }
-        //     })
-        //     .catch((err) => alert("Ocorreu um erro ao tentar abrir o WhatsApp."));
-
-        // Linking.canOpenURL(`whatsapp://send?text=${mensagem}`).then(supported => {
-        //     if (supported) {
-        //       return Linking.openURL(
-        //         `whatsapp://send?phone=${vaga.telefone}&text=${mensagem}`
-        //       );
-        //     } else {
-        //       return Linking.openURL(
-        //         `https://api.whatsapp.com/send?phone=${vaga.telefone}&text=${mensagem}`
-        //       );
-        //     }
-        //   })
-
         Linking.openURL(`whatsapp://send?text=${mensagem}&phone=${vaga.telefone}`);
     }
+    
     return (
         <TouchableOpacity onPress={() => {
             setVaga(vaga);

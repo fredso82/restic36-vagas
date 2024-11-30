@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { Keyboard, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-
+import RNPickerSelect from "react-native-picker-select";
 import Input from '../../componentes/Input';
 import { useAppContext } from '../../context/AppContext';
 import { RootStackParamList } from '../../routes/routes';
@@ -54,6 +54,7 @@ export default function VagaDetails() {
                 <Text style={styles.label}>Status</Text>
                 <View style={styles.viewPicker}>
                     <Picker
+                        mode='dialog'
                         style={styles.picker}
                         selectedValue={status}
                         onValueChange={(itemValue, itemIndex) => setStatus(itemValue)}>
@@ -66,6 +67,7 @@ export default function VagaDetails() {
                     <Text style={{ color: colors.white }}>Gravar</Text>
                 </TouchableOpacity>
             </View>
+            
         </Pressable>
     )
 }
