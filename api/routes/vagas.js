@@ -26,7 +26,11 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const vaga = await vagaRepository.create(req.body);
+        let vagaIncluir = req.body;
+        vagaIncluir.status = "Disponível";
+        vagaIncluir.dataCadastro = new Date().toISOString();
+
+        const vaga = await vagaRepository.create(vagaIncluir);
         res.status(201).json({ vaga });
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -35,7 +39,7 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try {
-        const vaga = await vagaRepository.update(req.params.id, req.body);
+        const vaga = await vagaRepository.update(req.params.id, req.body);        
         if (vaga) {
             res.json({ vaga });
         } else {

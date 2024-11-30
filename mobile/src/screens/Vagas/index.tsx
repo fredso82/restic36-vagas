@@ -1,12 +1,12 @@
 import { Feather } from '@expo/vector-icons';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, SafeAreaView, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { Vaga } from '../../models/vaga';
 import api from '../../services/api';
 import { VagaCard } from '../../componentes/VagaCard';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes/routes';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { colors } from '../../styles/colors';
 
 type Props = NativeStackScreenProps<RootStackParamList>;
@@ -15,18 +15,22 @@ export default function Vagas() {
     const navigation = useNavigation<Props['navigation']>();
     const [vagas, setVagas] = useState<Vaga[]>([]);
 
-    useEffect(() => {
-        const fetchVagas = async () => {
-            try {
-                const response = await api.get('/vagas');
-                setVagas(response.data.vagas);
-            } catch (error) {
-                console.log(error);
-            }
-        } 
+    const fetchVagas = async () => {
+        try {
+            const response = await api.get('/vagas');
+            setVagas(response.data.vagas);
+        } catch (error) {
+            console.log(error);
+        }
+    } 
 
+    useEffect(() => {
         fetchVagas();
     }, []);
+
+    useFocusEffect(React.useCallback(() => {
+        fetchVagas();
+    }, []));
 
     return (
         <SafeAreaView style={styles.container}>
