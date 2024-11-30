@@ -34,7 +34,6 @@ export default function Login() {
             api.post<Usuario>('/login', usuarioLogado)
                 .then((response) => {
                     login(response.data);
-                    //navigation.navigate("Vagas");
                 })
                 .catch((error) => {
                     if (error.response.status === 401) {
@@ -46,7 +45,6 @@ export default function Login() {
         } catch (error) {
             console.log(error);
         }
-
     };
 
     return (

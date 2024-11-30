@@ -4,8 +4,8 @@ const vagaRepository = require('../repositories/vagasRepository');
 
 router.get('/', async (req, res) => {
     try {
-        const jobs = await vagaRepository.findAll();
-        res.json({ jobs });
+        const vagas = await vagaRepository.findAll();
+        res.json({ vagas });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -13,11 +13,11 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const job = await vagaRepository.findById(req.params.id);
-        if (job) {
-            res.json({ job });
+        const vaga = await vagaRepository.findById(req.params.id);
+        if (vaga) {
+            res.json({ vaga });
         } else {
-            res.status(404).json({ error: 'Job not found' });
+            res.status(404).json({ error: 'Vaga não encontrada' });
         }
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -26,8 +26,8 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const job = await vagaRepository.create(req.body);
-        res.status(201).json({ job });
+        const vaga = await vagaRepository.create(req.body);
+        res.status(201).json({ vaga });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -35,11 +35,11 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try {
-        const job = await vagaRepository.update(req.params.id, req.body);
-        if (job) {
-            res.json({ job });
+        const vaga = await vagaRepository.update(req.params.id, req.body);
+        if (vaga) {
+            res.json({ vaga });
         } else {
-            res.status(404).json({ error: 'Job not found' });
+            res.status(404).json({ error: 'Vaga não encontrada' });
         }
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -48,11 +48,11 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const job = await vagaRepository.remove(req.params.id);
-        if (job) {
-            res.json({ job });
+        const vaga = await vagaRepository.remove(req.params.id);
+        if (vaga) {
+            res.json({ vaga });
         } else {
-            res.status(404).json({ error: 'Job not found' });
+            res.status(404).json({ error: 'Vaga não encontrada' });
         }
     } catch (err) {
         res.status(500).json({ error: err.message });

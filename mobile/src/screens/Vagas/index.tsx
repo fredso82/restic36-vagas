@@ -4,20 +4,26 @@ import { FlatList, SafeAreaView, Text, TouchableOpacity, View, StyleSheet } from
 import { Vaga } from '../../models/vaga';
 import api from '../../services/api';
 import { VagaCard } from '../../componentes/VagaCard';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../routes/routes';
+import { useNavigation } from '@react-navigation/native';
+import { colors } from '../../styles/colors';
 
+type Props = NativeStackScreenProps<RootStackParamList>;
 
 export default function Vagas() {
+    const navigation = useNavigation<Props['navigation']>();
     const [vagas, setVagas] = useState<Vaga[]>([]);
 
     useEffect(() => {
         const fetchVagas = async () => {
             try {
-                const response = await api.get<Vaga[]>('/vagas');
-                setVagas(response.data);
+                const response = await api.get('/vagas');
+                setVagas(response.data.vagas);
             } catch (error) {
                 console.log(error);
             }
-        }
+        } 
 
         fetchVagas();
     }, []);
@@ -34,7 +40,7 @@ export default function Vagas() {
                     }
                 />
             </View>
-            <TouchableOpacity onPress={() => alert("nova vaga")} style={styles.addVaga}>
+            <TouchableOpacity onPress={() => navigation.navigate("VagasAdd") } style={styles.addVaga}>
                 <Feather name='plus' size={40} color='white'></Feather>
             </TouchableOpacity>
         </SafeAreaView>
@@ -62,7 +68,7 @@ const styles = StyleSheet.create({
         maxHeight: "50%",
     },
     addVaga: {
-        backgroundColor: "#FB621E",
+        backgroundColor: colors.orange,
         height: 60,
         width: 60,
         borderRadius: 50,
