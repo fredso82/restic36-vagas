@@ -1,17 +1,15 @@
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { RootStackParamList } from "../../routes/routes";
-import { useState } from "react";
-import { colors } from "../../styles/colors";
-import Input from "../../componentes/Input";
+import { useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import Input from '../../componentes/Input';
+import { useAppContext } from '../../context/AppContext';
+import { Usuario } from '../../models/usuario';
 import api from '../../services/api';
-import { Usuario } from "../../models/usuario";
-import { useUser } from "../../context/AppContext";
+import { colors } from '../../styles/colors';
 
 
 export default function Perfil() {
-    const { user, logout } = useUser();
+    const { user, logout } = useAppContext();
     const [nome, setNome] = useState(user.nome);
     const [vldNome, setVldNome] = useState('');
     const [email, setEmail] = useState(user.email);

@@ -40,12 +40,10 @@ export default function AppNavigator() {
         <Stack.Navigator>
             <Stack.Screen name="Tabs" component={TabNavigator} options={{ headerShown: false }} />
             <Stack.Screen name="VagaAdd" component={VagaAdd} options={{
-                title: "Cadastro de Vaga",
-                presentation: "modal", ...TransitionPresets.FadeTransition
+                title: "Cadastro de Vaga"
             }} />
             <Stack.Screen name="VagaDetails" component={VagaDetails} options={{
-                title: "Detalhes de Vaga",
-                presentation: "modal", ...TransitionPresets.FadeTransition
+                title: "Detalhes de Vaga"
             }} />
         </Stack.Navigator>
     )
