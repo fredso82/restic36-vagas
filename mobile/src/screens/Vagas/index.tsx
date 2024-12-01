@@ -1,5 +1,5 @@
 import { Feather } from '@expo/vector-icons';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FlatList, SafeAreaView, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { Vaga } from '../../models/vaga';
 import api from '../../services/api';

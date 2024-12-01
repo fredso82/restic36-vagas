@@ -1,12 +1,11 @@
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Keyboard, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useState } from "react";
-import { colors } from "../../styles/colors";
-import Input from "../../componentes/Input";
+import { useState } from 'react';
+import { Keyboard, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import Input from '../../componentes/Input';
+import { useAppContext } from '../../context/AppContext';
+import { Usuario } from '../../models/usuario';
 import api from '../../services/api';
-import { Usuario } from "../../models/usuario";
-import { useAppContext } from "../../context/AppContext";
+import { colors } from '../../styles/colors';
 
 export default function Registro() {
     const { login } = useAppContext();

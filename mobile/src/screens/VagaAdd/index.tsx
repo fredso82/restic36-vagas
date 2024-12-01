@@ -1,4 +1,4 @@
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Keyboard, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { RootStackParamList } from "../../routes/routes";

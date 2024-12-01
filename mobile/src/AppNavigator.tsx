@@ -1,12 +1,11 @@
 import { Feather } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator, TransitionPresets } from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useAppContext } from "./context/AppContext";
 import Login from './screens/Login';
 import Registro from './screens/Registro';
 import Vagas from './screens/Vagas';
-import { TouchableOpacity } from 'react-native';
 import React from 'react';
 import Perfil from './screens/Perfil';
 import VagaAdd from './screens/VagaAdd';
@@ -16,7 +15,7 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function AppNavigator() {
-    const { user, logout } = useAppContext();
+    const { user } = useAppContext();
 
     const AuthStack = () => (
         <Stack.Navigator>
@@ -47,7 +46,6 @@ export default function AppNavigator() {
             }} />
         </Stack.Navigator>
     )
-
 
     return (
         <NavigationContainer>

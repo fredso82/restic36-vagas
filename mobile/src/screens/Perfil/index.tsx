@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         alignSelf: "flex-start",
         color: colors.red,
-        margin: 0
+        margin: 0,
+        marginTop: -12
     }
 });
