@@ -3,7 +3,6 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { Keyboard, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import RNPickerSelect from "react-native-picker-select";
 import Input from '../../componentes/Input';
 import { useAppContext } from '../../context/AppContext';
 import { RootStackParamList } from '../../routes/routes';
@@ -15,14 +14,52 @@ type Props = NativeStackScreenProps<RootStackParamList>;
 export default function VagaDetails() {
     const { vaga } = useAppContext();
     const navigation = useNavigation<Props['navigation']>();
+
     const [titulo, setTitulo] = useState(vaga.titulo);
+    const [vldTitulo, setVldTitulo] = useState('');
+
     const [descricao, setDescricao] = useState(vaga.descricao);
+    const [vldDescricao, setVldDescricao] = useState('');
+
     const [telefone, setTelefone] = useState(vaga.telefone);
+    const [vldTelefone, setVldTelefone] = useState('');
+
     const [empresa, setEmpresa] = useState(vaga.empresa);
+    const [vldEmpresa, setVldEmpresa] = useState('');
+
     const [status, setStatus] = useState(vaga.status);
 
     const handleCadastrar = () => {
         try {
+            let valido = true;
+            setVldTitulo("");
+            setVldDescricao("");
+            setVldTelefone("");
+            setVldEmpresa("");
+
+            if (!titulo) {
+                setVldTitulo("Informe o título");
+                valido = false;
+            }
+
+            if (!descricao) {
+                setVldDescricao("Informe a descrição");
+                valido = false;
+            }
+
+            if (!telefone) {
+                setVldTelefone("Informe o telefone");
+                valido = false;
+            }
+
+            if (!empresa) {
+                setVldEmpresa("Informe a empresa");
+                valido = false;
+            }
+
+            if (!valido) {
+                return;
+            }
 
             const vagaAlterar = {
                 titulo: titulo,
@@ -48,9 +85,17 @@ export default function VagaDetails() {
         <Pressable style={styles.container} onPress={Keyboard.dismiss}>
             <View style={styles.form}>
                 <Input label="Título" placeholder="informe o título" senha={false} value={titulo} onChangeText={setTitulo} />
+                {vldTitulo && (<Text style={styles.labelValidacao}>{vldTitulo}</Text>)}
+                
                 <Input label="Descrição" placeholder="informe a descrição" senha={false} value={descricao} onChangeText={setDescricao} />
+                {vldDescricao && (<Text style={styles.labelValidacao}>{vldDescricao}</Text>)}
+
                 <Input label="Telefone" placeholder="informe o telefone" senha={false} value={telefone} onChangeText={setTelefone} />
+                {vldTelefone && (<Text style={styles.labelValidacao}>{vldTelefone}</Text>)}
+
                 <Input label="Empresa" placeholder="informe a empresa" senha={false} value={empresa} onChangeText={setEmpresa} />
+                {vldEmpresa && (<Text style={styles.labelValidacao}>{vldEmpresa}</Text>)}
+
                 <Text style={styles.label}>Status</Text>
                 <View style={styles.viewPicker}>
                     <Picker
@@ -99,7 +144,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
         alignSelf: "flex-start",
         color: colors.red,
-        margin: 0
+        margin: 0,
+        marginTop: -12
     },
     viewPicker: {
         width: "100%",

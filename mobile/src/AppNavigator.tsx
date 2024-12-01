@@ -20,8 +20,8 @@ export default function AppNavigator() {
 
     const AuthStack = () => (
         <Stack.Navigator>
-            <Stack.Screen name='Login' component={Login} options={{ title: "Login", headerTitleAlign: "center" }} />
-            <Stack.Screen name='Registro' component={Registro} options={{ title: "Registrar", headerTitleAlign: "center" }} />
+            <Stack.Screen name='Login' component={Login} options={{ title: "Entrar", headerTitleAlign: "center" }} />
+            <Stack.Screen name='Registro' component={Registro} options={{ title: "Crie sua Conta", headerTitleAlign: "center" }} />
         </Stack.Navigator>
     );
 

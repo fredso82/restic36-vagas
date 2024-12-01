@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "row",
-        alignItems: "center",
         padding: 16,
         backgroundColor: colors.white
     },
@@ -115,6 +114,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         alignSelf: "flex-start",
         color: colors.red,
-        margin: 0
+        margin: 0,
+        marginTop: -12
     }
 });

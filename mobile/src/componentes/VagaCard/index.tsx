@@ -19,7 +19,8 @@ export function VagaCard({ vaga }: VagaProps) {
 
     function handleContato() {
         const mensagem = `Olá, gostaria de entrar em contato para falar a respeito da vaga ${vaga.titulo}.`;
-        Linking.openURL(`whatsapp://send?text=${mensagem}&phone=${vaga.telefone}`);
+        Linking.openURL(`whatsapp://send?text=${mensagem}&phone=${vaga.telefone}`)
+            .catch(e => alert("WhatsApp não instalado!"));
     }
     
     return (

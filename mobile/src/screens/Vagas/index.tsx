@@ -24,9 +24,9 @@ export default function Vagas() {
         }
     } 
 
-    useEffect(() => {
-        fetchVagas();
-    }, []);
+    // useEffect(() => {
+    //     fetchVagas();
+    // }, []);
 
     useFocusEffect(React.useCallback(() => {
         fetchVagas();
@@ -79,8 +79,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         position: "absolute",
-        bottom: "5%",
-        right: "5%",
+        bottom: "2%",
+        right: "3%",
         shadowOffset: { width: 3, height: 4 },
         elevation: 5
     }
